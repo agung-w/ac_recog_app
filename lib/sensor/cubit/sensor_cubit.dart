@@ -98,10 +98,11 @@ class SensorCubit extends Cubit<SensorState> {
       for (var element in (state as _Tracking).streamSubsriptions) {
         element.cancel();
       }
-      var box = await Hive.openBox<SensorData>('sensorDataBox');
-      for (int i = 0; i < box.length; i++) {
-        print(box.get(i).toString());
-      }
+      // var box = await Hive.openBox<SensorData>('sensorDataBox');
+      // for (int i = 0; i < box.length; i++) {
+      //   print(box.get(i).toString());
+      // }
+
       emit(const _Initial());
     }
   }
