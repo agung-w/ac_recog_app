@@ -1,8 +1,8 @@
 import 'dart:io';
 
 import 'package:ac_recog_app/cubit/sensor_availability_cubit.dart';
+import 'package:ac_recog_app/entities/model_output.dart';
 import 'package:ac_recog_app/sensor/cubit/sensor_cubit.dart';
-import 'package:ac_recog_app/sensor/entities/sensor_data.dart';
 import 'package:ac_recog_app/tes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -15,7 +15,8 @@ void main() async {
   final Directory path = await getTemporaryDirectory();
   Hive
     ..init(path.path)
-    ..registerAdapter(SensorDataAdapter());
+    ..registerAdapter(ModelOutputAdapter());
+  Hive.openBox<ModelOutput>("model_output_history");
 }
 
 class MainApp extends StatelessWidget {

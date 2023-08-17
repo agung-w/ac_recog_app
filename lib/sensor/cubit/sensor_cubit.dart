@@ -1,5 +1,7 @@
 import 'dart:async';
 
+import 'package:ac_recog_app/entities/model_output.dart';
+import 'package:ac_recog_app/human_activity_recognition_helper.dart';
 import 'package:ac_recog_app/sensor/entities/sensor_data.dart';
 import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -11,10 +13,14 @@ part 'sensor_state.dart';
 part 'sensor_cubit.freezed.dart';
 
 class SensorCubit extends Cubit<SensorState> {
-  SensorCubit() : super(const SensorState.initial());
-  void startTracking() async {
+  SensorCubit()
+      : super(SensorState.initial(
+            outputHistories:
+                Hive.box<ModelOutput>('model_output_history').values.toList()));
+  void startTracking({required HumanActivityRecognitionHelper helper}) async {
+    List<List<double>> sensorDataList = [];
+
     if (state is _Initial) {
-      var box = await Hive.openBox<SensorData>('sensorDataBox');
       Vector3 accelerometer = Vector3.zero();
       Vector3 gyroscope = Vector3.zero();
       Vector3 magnetometer = Vector3.zero();
@@ -87,9 +93,19 @@ class SensorCubit extends Cubit<SensorState> {
           relativeOrientationY: relativeOrientation.y,
           relativeOrientationZ: relativeOrientation.z,
         );
-        box.add(acSensorData);
+        if (sensorDataList.length == 28) {
+          _predict(helper: helper, input: sensorDataList)
+              .then((value) => sensorDataList.clear());
+          emit(_Tracking(
+              streamSubsriptions: streamSubsriptions,
+              outputHistories: _getLocalData()));
+        } else {
+          sensorDataList.add(acSensorData.toModelInput);
+        }
       }));
-      emit(_Tracking(streamSubsriptions: streamSubsriptions));
+      emit(_Tracking(
+          streamSubsriptions: streamSubsriptions,
+          outputHistories: _getLocalData()));
     }
   }
 
@@ -98,12 +114,20 @@ class SensorCubit extends Cubit<SensorState> {
       for (var element in (state as _Tracking).streamSubsriptions) {
         element.cancel();
       }
-      // var box = await Hive.openBox<SensorData>('sensorDataBox');
-      // for (int i = 0; i < box.length; i++) {
-      //   print(box.get(i).toString());
-      // }
-
-      emit(const _Initial());
+      emit(_Initial(outputHistories: _getLocalData()));
     }
+  }
+
+  List<ModelOutput> _getLocalData() {
+    var outputBox = Hive.box<ModelOutput>('model_output_history');
+    return outputBox.values.toList();
+  }
+
+  Future<void> _predict(
+      {required HumanActivityRecognitionHelper helper,
+      required List<List<double>> input}) async {
+    var outputBox = Hive.box<ModelOutput>('model_output_history');
+    ModelOutput classification = await helper.inference(input);
+    outputBox.add(classification);
   }
 }

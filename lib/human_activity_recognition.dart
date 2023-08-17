@@ -3,7 +3,7 @@ import 'dart:io';
 import 'package:tflite_flutter/tflite_flutter.dart';
 
 class HumanActivityRecognition {
-  static const String _modelPath = 'assets/models/right.tflite';
+  static const String _modelPath = 'assets/models/tes_right.tflite';
   late final Interpreter _interpreter;
   Tensor? inputTensor;
   Tensor? outputTensor;
@@ -36,11 +36,18 @@ class HumanActivityRecognition {
   void runinterference(
     List<List<double>> sensorDataList,
   ) {
+    try {
+      var output = List.filled(1 * 9, 0);
+      print(sensorDataList.length);
+      // _interpreter.run([sensorDataList], output);
+      _interpreter.run([sensorDataList], output);
+      print(output.computeNumElements);
+    } on Exception catch (e) {
+      print(e.toString());
+      throw Exception(e);
+    }
     // Get tensor input shape [1, 9]
-    var output = List.filled(1 * 9, 0);
-    print(sensorDataList.length);
-    _interpreter.run([sensorDataList], output);
-    print(output);
+
     // return output;
   }
 }

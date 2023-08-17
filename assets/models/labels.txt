@@ -1,0 +1,9 @@
+Modified_Skull_Crushers
+Seated_Rows
+Reserve_Flies
+Forward_Punches
+Diagonal_Shoulder_Rise
+Overhead_Triceps
+Lateral_Raise
+Bicep_Curls
+Over_Head_Press

@@ -16,23 +16,29 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$SensorState {
+  List<ModelOutput> get outputHistories => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() initial,
-    required TResult Function(List<StreamSubscription> streamSubsriptions)
+    required TResult Function(List<ModelOutput> outputHistories) initial,
+    required TResult Function(List<StreamSubscription> streamSubsriptions,
+            List<ModelOutput> outputHistories)
         tracking,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initial,
-    TResult? Function(List<StreamSubscription> streamSubsriptions)? tracking,
+    TResult? Function(List<ModelOutput> outputHistories)? initial,
+    TResult? Function(List<StreamSubscription> streamSubsriptions,
+            List<ModelOutput> outputHistories)?
+        tracking,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initial,
-    TResult Function(List<StreamSubscription> streamSubsriptions)? tracking,
+    TResult Function(List<ModelOutput> outputHistories)? initial,
+    TResult Function(List<StreamSubscription> streamSubsriptions,
+            List<ModelOutput> outputHistories)?
+        tracking,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -55,6 +61,10 @@ mixin _$SensorState {
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
+
+  @JsonKey(ignore: true)
+  $SensorStateCopyWith<SensorState> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -62,6 +72,8 @@ abstract class $SensorStateCopyWith<$Res> {
   factory $SensorStateCopyWith(
           SensorState value, $Res Function(SensorState) then) =
       _$SensorStateCopyWithImpl<$Res, SensorState>;
+  @useResult
+  $Res call({List<ModelOutput> outputHistories});
 }
 
 /// @nodoc
@@ -73,13 +85,29 @@ class _$SensorStateCopyWithImpl<$Res, $Val extends SensorState>
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? outputHistories = null,
+  }) {
+    return _then(_value.copyWith(
+      outputHistories: null == outputHistories
+          ? _value.outputHistories
+          : outputHistories // ignore: cast_nullable_to_non_nullable
+              as List<ModelOutput>,
+    ) as $Val);
+  }
 }
 
 /// @nodoc
-abstract class _$$_InitialCopyWith<$Res> {
+abstract class _$$_InitialCopyWith<$Res> implements $SensorStateCopyWith<$Res> {
   factory _$$_InitialCopyWith(
           _$_Initial value, $Res Function(_$_Initial) then) =
       __$$_InitialCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({List<ModelOutput> outputHistories});
 }
 
 /// @nodoc
@@ -88,55 +116,92 @@ class __$$_InitialCopyWithImpl<$Res>
     implements _$$_InitialCopyWith<$Res> {
   __$$_InitialCopyWithImpl(_$_Initial _value, $Res Function(_$_Initial) _then)
       : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? outputHistories = null,
+  }) {
+    return _then(_$_Initial(
+      outputHistories: null == outputHistories
+          ? _value._outputHistories
+          : outputHistories // ignore: cast_nullable_to_non_nullable
+              as List<ModelOutput>,
+    ));
+  }
 }
 
 /// @nodoc
 
 class _$_Initial implements _Initial {
-  const _$_Initial();
+  const _$_Initial({required final List<ModelOutput> outputHistories})
+      : _outputHistories = outputHistories;
+
+  final List<ModelOutput> _outputHistories;
+  @override
+  List<ModelOutput> get outputHistories {
+    if (_outputHistories is EqualUnmodifiableListView) return _outputHistories;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_outputHistories);
+  }
 
   @override
   String toString() {
-    return 'SensorState.initial()';
+    return 'SensorState.initial(outputHistories: $outputHistories)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$_Initial);
+        (other.runtimeType == runtimeType &&
+            other is _$_Initial &&
+            const DeepCollectionEquality()
+                .equals(other._outputHistories, _outputHistories));
   }
 
   @override
-  int get hashCode => runtimeType.hashCode;
+  int get hashCode => Object.hash(
+      runtimeType, const DeepCollectionEquality().hash(_outputHistories));
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_InitialCopyWith<_$_Initial> get copyWith =>
+      __$$_InitialCopyWithImpl<_$_Initial>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() initial,
-    required TResult Function(List<StreamSubscription> streamSubsriptions)
+    required TResult Function(List<ModelOutput> outputHistories) initial,
+    required TResult Function(List<StreamSubscription> streamSubsriptions,
+            List<ModelOutput> outputHistories)
         tracking,
   }) {
-    return initial();
+    return initial(outputHistories);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initial,
-    TResult? Function(List<StreamSubscription> streamSubsriptions)? tracking,
+    TResult? Function(List<ModelOutput> outputHistories)? initial,
+    TResult? Function(List<StreamSubscription> streamSubsriptions,
+            List<ModelOutput> outputHistories)?
+        tracking,
   }) {
-    return initial?.call();
+    return initial?.call(outputHistories);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initial,
-    TResult Function(List<StreamSubscription> streamSubsriptions)? tracking,
+    TResult Function(List<ModelOutput> outputHistories)? initial,
+    TResult Function(List<StreamSubscription> streamSubsriptions,
+            List<ModelOutput> outputHistories)?
+        tracking,
     required TResult orElse(),
   }) {
     if (initial != null) {
-      return initial();
+      return initial(outputHistories);
     }
     return orElse();
   }
@@ -174,16 +239,28 @@ class _$_Initial implements _Initial {
 }
 
 abstract class _Initial implements SensorState {
-  const factory _Initial() = _$_Initial;
+  const factory _Initial({required final List<ModelOutput> outputHistories}) =
+      _$_Initial;
+
+  @override
+  List<ModelOutput> get outputHistories;
+  @override
+  @JsonKey(ignore: true)
+  _$$_InitialCopyWith<_$_Initial> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$_TrackingCopyWith<$Res> {
+abstract class _$$_TrackingCopyWith<$Res>
+    implements $SensorStateCopyWith<$Res> {
   factory _$$_TrackingCopyWith(
           _$_Tracking value, $Res Function(_$_Tracking) then) =
       __$$_TrackingCopyWithImpl<$Res>;
+  @override
   @useResult
-  $Res call({List<StreamSubscription> streamSubsriptions});
+  $Res call(
+      {List<StreamSubscription> streamSubsriptions,
+      List<ModelOutput> outputHistories});
 }
 
 /// @nodoc
@@ -198,12 +275,17 @@ class __$$_TrackingCopyWithImpl<$Res>
   @override
   $Res call({
     Object? streamSubsriptions = null,
+    Object? outputHistories = null,
   }) {
     return _then(_$_Tracking(
       streamSubsriptions: null == streamSubsriptions
           ? _value._streamSubsriptions
           : streamSubsriptions // ignore: cast_nullable_to_non_nullable
               as List<StreamSubscription>,
+      outputHistories: null == outputHistories
+          ? _value._outputHistories
+          : outputHistories // ignore: cast_nullable_to_non_nullable
+              as List<ModelOutput>,
     ));
   }
 }
@@ -212,8 +294,10 @@ class __$$_TrackingCopyWithImpl<$Res>
 
 class _$_Tracking implements _Tracking {
   const _$_Tracking(
-      {required final List<StreamSubscription> streamSubsriptions})
-      : _streamSubsriptions = streamSubsriptions;
+      {required final List<StreamSubscription> streamSubsriptions,
+      required final List<ModelOutput> outputHistories})
+      : _streamSubsriptions = streamSubsriptions,
+        _outputHistories = outputHistories;
 
   final List<StreamSubscription> _streamSubsriptions;
   @override
@@ -224,9 +308,17 @@ class _$_Tracking implements _Tracking {
     return EqualUnmodifiableListView(_streamSubsriptions);
   }
 
+  final List<ModelOutput> _outputHistories;
+  @override
+  List<ModelOutput> get outputHistories {
+    if (_outputHistories is EqualUnmodifiableListView) return _outputHistories;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_outputHistories);
+  }
+
   @override
   String toString() {
-    return 'SensorState.tracking(streamSubsriptions: $streamSubsriptions)';
+    return 'SensorState.tracking(streamSubsriptions: $streamSubsriptions, outputHistories: $outputHistories)';
   }
 
   @override
@@ -235,12 +327,16 @@ class _$_Tracking implements _Tracking {
         (other.runtimeType == runtimeType &&
             other is _$_Tracking &&
             const DeepCollectionEquality()
-                .equals(other._streamSubsriptions, _streamSubsriptions));
+                .equals(other._streamSubsriptions, _streamSubsriptions) &&
+            const DeepCollectionEquality()
+                .equals(other._outputHistories, _outputHistories));
   }
 
   @override
   int get hashCode => Object.hash(
-      runtimeType, const DeepCollectionEquality().hash(_streamSubsriptions));
+      runtimeType,
+      const DeepCollectionEquality().hash(_streamSubsriptions),
+      const DeepCollectionEquality().hash(_outputHistories));
 
   @JsonKey(ignore: true)
   @override
@@ -251,31 +347,36 @@ class _$_Tracking implements _Tracking {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function() initial,
-    required TResult Function(List<StreamSubscription> streamSubsriptions)
+    required TResult Function(List<ModelOutput> outputHistories) initial,
+    required TResult Function(List<StreamSubscription> streamSubsriptions,
+            List<ModelOutput> outputHistories)
         tracking,
   }) {
-    return tracking(streamSubsriptions);
+    return tracking(streamSubsriptions, outputHistories);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function()? initial,
-    TResult? Function(List<StreamSubscription> streamSubsriptions)? tracking,
+    TResult? Function(List<ModelOutput> outputHistories)? initial,
+    TResult? Function(List<StreamSubscription> streamSubsriptions,
+            List<ModelOutput> outputHistories)?
+        tracking,
   }) {
-    return tracking?.call(streamSubsriptions);
+    return tracking?.call(streamSubsriptions, outputHistories);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function()? initial,
-    TResult Function(List<StreamSubscription> streamSubsriptions)? tracking,
+    TResult Function(List<ModelOutput> outputHistories)? initial,
+    TResult Function(List<StreamSubscription> streamSubsriptions,
+            List<ModelOutput> outputHistories)?
+        tracking,
     required TResult orElse(),
   }) {
     if (tracking != null) {
-      return tracking(streamSubsriptions);
+      return tracking(streamSubsriptions, outputHistories);
     }
     return orElse();
   }
@@ -314,10 +415,13 @@ class _$_Tracking implements _Tracking {
 
 abstract class _Tracking implements SensorState {
   const factory _Tracking(
-          {required final List<StreamSubscription> streamSubsriptions}) =
-      _$_Tracking;
+      {required final List<StreamSubscription> streamSubsriptions,
+      required final List<ModelOutput> outputHistories}) = _$_Tracking;
 
   List<StreamSubscription> get streamSubsriptions;
+  @override
+  List<ModelOutput> get outputHistories;
+  @override
   @JsonKey(ignore: true)
   _$$_TrackingCopyWith<_$_Tracking> get copyWith =>
       throw _privateConstructorUsedError;

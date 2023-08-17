@@ -134,4 +134,20 @@ class SensorData {
   String toString() {
     return toJson().toString();
   }
+
+  List<double> get toModelInput {
+    return [
+      accelerometerX,
+      linearAccelerometerX,
+      gravityX,
+      eulerX,
+      eulerZ,
+      quaternionX,
+      quaternionZ,
+      inverseQuaternionX,
+      inverseQuaternionZ,
+      relativeOrientationZ,
+      magnetometerX
+    ];
+  }
 }
