@@ -1,3 +1,4 @@
+import 'package:ac_recog_app/helper/my_custom_date_message.dart';
 import 'package:hive/hive.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:timeago/timeago.dart' as timeago;
@@ -20,7 +21,8 @@ class ModelOutput {
     required this.probability,
   });
   String get toHumanDate {
+    timeago.setLocaleMessages('en_short', MyCustomDateMessage());
     return timeago.format(DateTime.fromMillisecondsSinceEpoch(timestamp),
-        locale: 'en_short');
+        locale: 'en_short', allowFromNow: true);
   }
 }

@@ -9,7 +9,7 @@ class SensorAvailabilityCubit extends Cubit<SensorAvailabilityState> {
   SensorAvailabilityCubit()
       : super(const SensorAvailabilityState.unavailable());
   void checkDeviceSensor() async {
-    List<String> unavailableSensors = List.empty();
+    List<String> unavailableSensors = [];
     await motionSensors.isGyroscopeAvailable() != true
         ? unavailableSensors.add("Gyroscope")
         : null;
