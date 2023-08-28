@@ -2,10 +2,11 @@ import 'dart:io';
 
 import 'package:ac_recog_app/cubit/load_model_cubit.dart';
 import 'package:ac_recog_app/cubit/local_data_cubit.dart';
+import 'package:ac_recog_app/cubit/login_cubit.dart';
 import 'package:ac_recog_app/cubit/sensor_availability_cubit.dart';
 import 'package:ac_recog_app/cubit/sensor_cubit.dart';
 import 'package:ac_recog_app/entities/model_output.dart';
-import 'package:ac_recog_app/home.dart';
+import 'package:ac_recog_app/ui/pages/login.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive/hive.dart';
@@ -30,6 +31,7 @@ class MainApp extends StatelessWidget {
         BlocProvider(create: (context) => SensorCubit()),
         BlocProvider(create: (context) => LocalDataCubit()..loadData()),
         BlocProvider(create: (context) => LoadModelCubit()..loadModel()),
+        BlocProvider(create: (context) => LoginCubit()),
         BlocProvider(
             create: (context) => SensorAvailabilityCubit()..checkDeviceSensor())
       ],
@@ -41,7 +43,7 @@ class MainApp extends StatelessWidget {
                       backgroundColor: const Color(0xFFfb5c18))),
               bottomNavigationBarTheme: const BottomNavigationBarThemeData(
                   selectedItemColor: Color(0xFFfb5c18))),
-          home: const Home()),
+          home: const Login()),
     );
   }
 }
