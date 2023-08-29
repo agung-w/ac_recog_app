@@ -16,12 +16,23 @@ class Home extends StatelessWidget {
         body: BlocBuilder<SensorAvailabilityCubit, SensorAvailabilityState>(
           builder: (context, state) {
             return state.map(
-              available: (value) => SizedBox(
-                height: MediaQuery.of(context).size.height * 0.8,
-                child: const Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [Clock(), Tracker(), LatestResult()],
-                ),
+              available: (value) => const Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Expanded(
+                      flex: 2,
+                      child: Padding(
+                        padding: EdgeInsets.only(top: 6),
+                        child: Clock(),
+                      )),
+                  Expanded(flex: 1, child: Tracker()),
+                  Expanded(
+                      flex: 2,
+                      child: Padding(
+                        padding: EdgeInsets.only(top: 10),
+                        child: LatestResult(),
+                      ))
+                ],
               ),
               unavailable: (value) => Center(
                 child: Text(

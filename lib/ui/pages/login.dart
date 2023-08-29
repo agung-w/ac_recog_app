@@ -75,48 +75,51 @@ class Login extends StatelessWidget {
               ),
               SizedBox(
                 width: MediaQuery.of(context).size.width * 0.7,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Row(
-                      children: [
-                        Radio(
-                          visualDensity: const VisualDensity(
-                              horizontal: VisualDensity.minimumDensity,
-                              vertical: VisualDensity.minimumDensity),
-                          activeColor: const Color(0xFFfb5c18),
-                          value: "LEFT",
-                          groupValue: state.mapOrNull(
-                            initial: (value) => value.hand,
+                child: Transform.scale(
+                  scale: 0.8,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Row(
+                        children: [
+                          Radio(
+                            visualDensity: const VisualDensity(
+                                horizontal: VisualDensity.minimumDensity,
+                                vertical: VisualDensity.minimumDensity),
+                            activeColor: const Color(0xFFfb5c18),
+                            value: "LEFT",
+                            groupValue: state.mapOrNull(
+                              initial: (value) => value.hand,
+                            ),
+                            onChanged: state.mapOrNull(
+                                initial: (_) => ((value) => context
+                                    .read<LoginCubit>()
+                                    .setHand(hand: value.toString()))),
                           ),
-                          onChanged: state.mapOrNull(
-                              initial: (_) => ((value) => context
-                                  .read<LoginCubit>()
-                                  .setHand(hand: value.toString()))),
-                        ),
-                        const Text("L"),
-                      ],
-                    ),
-                    Row(
-                      children: [
-                        Radio(
-                          visualDensity: const VisualDensity(
-                              horizontal: VisualDensity.minimumDensity,
-                              vertical: VisualDensity.minimumDensity),
-                          activeColor: const Color(0xFFfb5c18),
-                          value: "RIGHT",
-                          groupValue: state.mapOrNull(
-                            initial: (value) => value.hand,
+                          const Text("L"),
+                        ],
+                      ),
+                      Row(
+                        children: [
+                          Radio(
+                            visualDensity: const VisualDensity(
+                                horizontal: VisualDensity.minimumDensity,
+                                vertical: VisualDensity.minimumDensity),
+                            activeColor: const Color(0xFFfb5c18),
+                            value: "RIGHT",
+                            groupValue: state.mapOrNull(
+                              initial: (value) => value.hand,
+                            ),
+                            onChanged: state.mapOrNull(
+                                initial: (_) => ((value) => context
+                                    .read<LoginCubit>()
+                                    .setHand(hand: value.toString()))),
                           ),
-                          onChanged: state.mapOrNull(
-                              initial: (_) => ((value) => context
-                                  .read<LoginCubit>()
-                                  .setHand(hand: value.toString()))),
-                        ),
-                        const Text("R"),
-                      ],
-                    ),
-                  ],
+                          const Text("R"),
+                        ],
+                      ),
+                    ],
+                  ),
                 ),
               ),
               SizedBox(

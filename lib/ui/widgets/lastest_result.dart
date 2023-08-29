@@ -24,7 +24,11 @@ class LatestResult extends StatelessWidget {
                         ?.result ??
                     ""),
                 initial: (value) => const Text("Cant load data"),
-                loading: (value) => const Loading());
+                loading: (value) => const Column(
+                      children: [
+                        Loading(),
+                      ],
+                    ));
           },
         );
       },
