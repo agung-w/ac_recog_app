@@ -27,6 +27,13 @@ class LoginCubit extends Cubit<LoginState> {
     }
   }
 
+  User? getUser() {
+    if (state is _SignedIn) {
+      return (state as _SignedIn).user;
+    }
+    return null;
+  }
+
   void setUsername({required String name}) {
     if (state is _Initial) {
       emit((state as _Initial).copyWith(username: name));

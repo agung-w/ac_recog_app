@@ -10,19 +10,33 @@ class ModelOutput {
   @HiveField(0)
   final int timestamp;
   @HiveField(1)
-  @JsonKey(name: 'result')
-  final String result;
+  final String username;
   @HiveField(2)
-  @JsonKey(name: 'probability')
   final double probability;
+  @HiveField(3)
+  final String result;
+  @HiveField(4)
+  final String hand;
+
   const ModelOutput({
     required this.timestamp,
-    required this.result,
+    required this.username,
     required this.probability,
+    required this.result,
+    required this.hand,
   });
   String get toHumanDate {
     timeago.setLocaleMessages('en_short', MyCustomDateMessage());
     return timeago.format(DateTime.fromMillisecondsSinceEpoch(timestamp),
         locale: 'en_short', allowFromNow: true);
+  }
+
+  @override
+  factory ModelOutput.fromJson(Map<String, dynamic> json) =>
+      _$ModelOutputFromJson(json);
+  Map<String, dynamic> toJson() => _$ModelOutputToJson(this);
+  @override
+  String toString() {
+    return toJson().toString();
   }
 }

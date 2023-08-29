@@ -4,7 +4,8 @@ import 'package:ac_recog_app/cubit/load_model_cubit.dart';
 import 'package:ac_recog_app/cubit/local_data_cubit.dart';
 import 'package:ac_recog_app/cubit/login_cubit.dart';
 import 'package:ac_recog_app/cubit/sensor_availability_cubit.dart';
-import 'package:ac_recog_app/cubit/sensor_cubit.dart';
+import 'package:ac_recog_app/cubit/tracker_cubit.dart';
+import 'package:ac_recog_app/entities/model_input.dart';
 import 'package:ac_recog_app/entities/model_output.dart';
 import 'package:ac_recog_app/ui/pages/login.dart';
 import 'package:flutter/material.dart';
@@ -18,7 +19,8 @@ void main() async {
   final Directory path = await getTemporaryDirectory();
   Hive
     ..init(path.path)
-    ..registerAdapter(ModelOutputAdapter());
+    ..registerAdapter(ModelOutputAdapter())
+    ..registerAdapter(ModelInputAdapter());
 }
 
 class MainApp extends StatelessWidget {
@@ -28,7 +30,7 @@ class MainApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-        BlocProvider(create: (context) => SensorCubit()),
+        BlocProvider(create: (context) => TrackerCubit()),
         BlocProvider(create: (context) => LocalDataCubit()..loadData()),
         BlocProvider(create: (context) => LoadModelCubit()..loadModel()),
         BlocProvider(create: (context) => LoginCubit()),

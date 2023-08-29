@@ -1,6 +1,7 @@
 import 'dart:isolate';
 
 import 'package:ac_recog_app/entities/model_output.dart';
+import 'package:ac_recog_app/entities/user.dart';
 import 'package:ac_recog_app/helper/isolate_inference.dart';
 import 'package:tflite_flutter/tflite_flutter.dart';
 
@@ -22,7 +23,7 @@ class HumanActivityRecognitionHelper {
     inputTensor = interpreter.getInputTensors().first;
     // Get tensor output shape [1, 9]
     outputTensor = interpreter.getOutputTensors().first;
-    print(inputTensor.toString());
+    // print(inputTensor.toString());
   }
 
   Future<void> initHelper() async {
@@ -40,9 +41,9 @@ class HumanActivityRecognitionHelper {
     return results;
   }
 
-  Future<ModelOutput> inference(List<List<double>> tes) async {
-    var isolateModel = InferenceModel(
-        tes, interpreter.address, inputTensor.shape, outputTensor.shape);
+  Future<ModelOutput> inference(List<List<double>> inputList, User user) async {
+    var isolateModel = InferenceModel(inputList, interpreter.address,
+        inputTensor.shape, outputTensor.shape, user);
     return _inference(isolateModel);
   }
 

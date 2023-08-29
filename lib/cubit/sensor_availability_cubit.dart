@@ -6,8 +6,7 @@ part 'sensor_availability_state.dart';
 part 'sensor_availability_cubit.freezed.dart';
 
 class SensorAvailabilityCubit extends Cubit<SensorAvailabilityState> {
-  SensorAvailabilityCubit()
-      : super(const SensorAvailabilityState.unavailable());
+  SensorAvailabilityCubit() : super(const SensorAvailabilityState.initial());
   void checkDeviceSensor() async {
     List<String> unavailableSensors = [];
     await motionSensors.isGyroscopeAvailable() != true

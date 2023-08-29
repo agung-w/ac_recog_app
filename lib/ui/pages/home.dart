@@ -1,6 +1,7 @@
 import 'package:ac_recog_app/cubit/sensor_availability_cubit.dart';
 import 'package:ac_recog_app/ui/widgets/clock.dart';
 import 'package:ac_recog_app/ui/widgets/lastest_result.dart';
+import 'package:ac_recog_app/ui/widgets/loading_animation.dart';
 import 'package:ac_recog_app/ui/widgets/tracker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -28,6 +29,7 @@ class Home extends StatelessWidget {
                   textAlign: TextAlign.center,
                 ),
               ),
+              initial: (value) => const Center(child: Loading()),
             );
           },
         ),

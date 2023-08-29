@@ -19,37 +19,49 @@ mixin _$LocalDataState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function(Box<ModelOutput> box) loaded,
+    required TResult Function() loading,
+    required TResult Function(
+            Box<ModelOutput> modelOutputBox, Box<ModelInput> modelInputBox)
+        loaded,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
-    TResult? Function(Box<ModelOutput> box)? loaded,
+    TResult? Function()? loading,
+    TResult? Function(
+            Box<ModelOutput> modelOutputBox, Box<ModelInput> modelInputBox)?
+        loaded,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(Box<ModelOutput> box)? loaded,
+    TResult Function()? loading,
+    TResult Function(
+            Box<ModelOutput> modelOutputBox, Box<ModelInput> modelInputBox)?
+        loaded,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Initial value) initial,
+    required TResult Function(_Loading value) loading,
     required TResult Function(_Loaded value) loaded,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initial value)? initial,
+    TResult? Function(_Loading value)? loading,
     TResult? Function(_Loaded value)? loaded,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initial value)? initial,
+    TResult Function(_Loading value)? loading,
     TResult Function(_Loaded value)? loaded,
     required TResult orElse(),
   }) =>
@@ -112,7 +124,10 @@ class _$_Initial implements _Initial {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function(Box<ModelOutput> box) loaded,
+    required TResult Function() loading,
+    required TResult Function(
+            Box<ModelOutput> modelOutputBox, Box<ModelInput> modelInputBox)
+        loaded,
   }) {
     return initial();
   }
@@ -121,7 +136,10 @@ class _$_Initial implements _Initial {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
-    TResult? Function(Box<ModelOutput> box)? loaded,
+    TResult? Function()? loading,
+    TResult? Function(
+            Box<ModelOutput> modelOutputBox, Box<ModelInput> modelInputBox)?
+        loaded,
   }) {
     return initial?.call();
   }
@@ -130,7 +148,10 @@ class _$_Initial implements _Initial {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(Box<ModelOutput> box)? loaded,
+    TResult Function()? loading,
+    TResult Function(
+            Box<ModelOutput> modelOutputBox, Box<ModelInput> modelInputBox)?
+        loaded,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -143,6 +164,7 @@ class _$_Initial implements _Initial {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Initial value) initial,
+    required TResult Function(_Loading value) loading,
     required TResult Function(_Loaded value) loaded,
   }) {
     return initial(this);
@@ -152,6 +174,7 @@ class _$_Initial implements _Initial {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initial value)? initial,
+    TResult? Function(_Loading value)? loading,
     TResult? Function(_Loaded value)? loaded,
   }) {
     return initial?.call(this);
@@ -161,6 +184,7 @@ class _$_Initial implements _Initial {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initial value)? initial,
+    TResult Function(_Loading value)? loading,
     TResult Function(_Loaded value)? loaded,
     required TResult orElse(),
   }) {
@@ -176,11 +200,124 @@ abstract class _Initial implements LocalDataState {
 }
 
 /// @nodoc
+abstract class _$$_LoadingCopyWith<$Res> {
+  factory _$$_LoadingCopyWith(
+          _$_Loading value, $Res Function(_$_Loading) then) =
+      __$$_LoadingCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$_LoadingCopyWithImpl<$Res>
+    extends _$LocalDataStateCopyWithImpl<$Res, _$_Loading>
+    implements _$$_LoadingCopyWith<$Res> {
+  __$$_LoadingCopyWithImpl(_$_Loading _value, $Res Function(_$_Loading) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$_Loading implements _Loading {
+  const _$_Loading();
+
+  @override
+  String toString() {
+    return 'LocalDataState.loading()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$_Loading);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function() loading,
+    required TResult Function(
+            Box<ModelOutput> modelOutputBox, Box<ModelInput> modelInputBox)
+        loaded,
+  }) {
+    return loading();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initial,
+    TResult? Function()? loading,
+    TResult? Function(
+            Box<ModelOutput> modelOutputBox, Box<ModelInput> modelInputBox)?
+        loaded,
+  }) {
+    return loading?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? loading,
+    TResult Function(
+            Box<ModelOutput> modelOutputBox, Box<ModelInput> modelInputBox)?
+        loaded,
+    required TResult orElse(),
+  }) {
+    if (loading != null) {
+      return loading();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initial value) initial,
+    required TResult Function(_Loading value) loading,
+    required TResult Function(_Loaded value) loaded,
+  }) {
+    return loading(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initial value)? initial,
+    TResult? Function(_Loading value)? loading,
+    TResult? Function(_Loaded value)? loaded,
+  }) {
+    return loading?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initial value)? initial,
+    TResult Function(_Loading value)? loading,
+    TResult Function(_Loaded value)? loaded,
+    required TResult orElse(),
+  }) {
+    if (loading != null) {
+      return loading(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _Loading implements LocalDataState {
+  const factory _Loading() = _$_Loading;
+}
+
+/// @nodoc
 abstract class _$$_LoadedCopyWith<$Res> {
   factory _$$_LoadedCopyWith(_$_Loaded value, $Res Function(_$_Loaded) then) =
       __$$_LoadedCopyWithImpl<$Res>;
   @useResult
-  $Res call({Box<ModelOutput> box});
+  $Res call({Box<ModelOutput> modelOutputBox, Box<ModelInput> modelInputBox});
 }
 
 /// @nodoc
@@ -193,13 +330,18 @@ class __$$_LoadedCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? box = null,
+    Object? modelOutputBox = null,
+    Object? modelInputBox = null,
   }) {
     return _then(_$_Loaded(
-      box: null == box
-          ? _value.box
-          : box // ignore: cast_nullable_to_non_nullable
+      modelOutputBox: null == modelOutputBox
+          ? _value.modelOutputBox
+          : modelOutputBox // ignore: cast_nullable_to_non_nullable
               as Box<ModelOutput>,
+      modelInputBox: null == modelInputBox
+          ? _value.modelInputBox
+          : modelInputBox // ignore: cast_nullable_to_non_nullable
+              as Box<ModelInput>,
     ));
   }
 }
@@ -207,14 +349,16 @@ class __$$_LoadedCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_Loaded implements _Loaded {
-  const _$_Loaded({required this.box});
+  const _$_Loaded({required this.modelOutputBox, required this.modelInputBox});
 
   @override
-  final Box<ModelOutput> box;
+  final Box<ModelOutput> modelOutputBox;
+  @override
+  final Box<ModelInput> modelInputBox;
 
   @override
   String toString() {
-    return 'LocalDataState.loaded(box: $box)';
+    return 'LocalDataState.loaded(modelOutputBox: $modelOutputBox, modelInputBox: $modelInputBox)';
   }
 
   @override
@@ -222,11 +366,14 @@ class _$_Loaded implements _Loaded {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_Loaded &&
-            (identical(other.box, box) || other.box == box));
+            (identical(other.modelOutputBox, modelOutputBox) ||
+                other.modelOutputBox == modelOutputBox) &&
+            (identical(other.modelInputBox, modelInputBox) ||
+                other.modelInputBox == modelInputBox));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, box);
+  int get hashCode => Object.hash(runtimeType, modelOutputBox, modelInputBox);
 
   @JsonKey(ignore: true)
   @override
@@ -238,29 +385,38 @@ class _$_Loaded implements _Loaded {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function(Box<ModelOutput> box) loaded,
+    required TResult Function() loading,
+    required TResult Function(
+            Box<ModelOutput> modelOutputBox, Box<ModelInput> modelInputBox)
+        loaded,
   }) {
-    return loaded(box);
+    return loaded(modelOutputBox, modelInputBox);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
-    TResult? Function(Box<ModelOutput> box)? loaded,
+    TResult? Function()? loading,
+    TResult? Function(
+            Box<ModelOutput> modelOutputBox, Box<ModelInput> modelInputBox)?
+        loaded,
   }) {
-    return loaded?.call(box);
+    return loaded?.call(modelOutputBox, modelInputBox);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(Box<ModelOutput> box)? loaded,
+    TResult Function()? loading,
+    TResult Function(
+            Box<ModelOutput> modelOutputBox, Box<ModelInput> modelInputBox)?
+        loaded,
     required TResult orElse(),
   }) {
     if (loaded != null) {
-      return loaded(box);
+      return loaded(modelOutputBox, modelInputBox);
     }
     return orElse();
   }
@@ -269,6 +425,7 @@ class _$_Loaded implements _Loaded {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Initial value) initial,
+    required TResult Function(_Loading value) loading,
     required TResult Function(_Loaded value) loaded,
   }) {
     return loaded(this);
@@ -278,6 +435,7 @@ class _$_Loaded implements _Loaded {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initial value)? initial,
+    TResult? Function(_Loading value)? loading,
     TResult? Function(_Loaded value)? loaded,
   }) {
     return loaded?.call(this);
@@ -287,6 +445,7 @@ class _$_Loaded implements _Loaded {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initial value)? initial,
+    TResult Function(_Loading value)? loading,
     TResult Function(_Loaded value)? loaded,
     required TResult orElse(),
   }) {
@@ -298,9 +457,12 @@ class _$_Loaded implements _Loaded {
 }
 
 abstract class _Loaded implements LocalDataState {
-  const factory _Loaded({required final Box<ModelOutput> box}) = _$_Loaded;
+  const factory _Loaded(
+      {required final Box<ModelOutput> modelOutputBox,
+      required final Box<ModelInput> modelInputBox}) = _$_Loaded;
 
-  Box<ModelOutput> get box;
+  Box<ModelOutput> get modelOutputBox;
+  Box<ModelInput> get modelInputBox;
   @JsonKey(ignore: true)
   _$$_LoadedCopyWith<_$_Loaded> get copyWith =>
       throw _privateConstructorUsedError;

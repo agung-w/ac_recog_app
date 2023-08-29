@@ -1,5 +1,6 @@
 import 'dart:isolate';
 import 'package:ac_recog_app/entities/model_output.dart';
+import 'package:ac_recog_app/entities/user.dart';
 import 'package:tflite_flutter/tflite_flutter.dart';
 
 class IsolateInference {
@@ -52,7 +53,9 @@ class IsolateInference {
       ModelOutput modelOutput = ModelOutput(
           timestamp: DateTime.now().millisecondsSinceEpoch,
           result: labels[result.indexOf(maxScore)],
-          probability: maxScore);
+          probability: maxScore,
+          username: isolateModel.user.username,
+          hand: isolateModel.user.hand);
       isolateModel.responsePort.send(modelOutput);
     }
   }
@@ -64,7 +67,8 @@ class InferenceModel {
   List<int> inputShape;
   List<int> outputShape;
   late SendPort responsePort;
+  User user;
 
   InferenceModel(this.sensorData, this.interpreterAddress, this.inputShape,
-      this.outputShape);
+      this.outputShape, this.user);
 }

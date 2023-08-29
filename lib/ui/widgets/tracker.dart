@@ -1,6 +1,7 @@
 import 'package:ac_recog_app/cubit/load_model_cubit.dart';
 import 'package:ac_recog_app/cubit/local_data_cubit.dart';
-import 'package:ac_recog_app/cubit/sensor_cubit.dart';
+import 'package:ac_recog_app/cubit/login_cubit.dart';
+import 'package:ac_recog_app/cubit/tracker_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -9,11 +10,11 @@ class Tracker extends StatelessWidget {
   bool? canStartBeClicked({
     required LoadModelState loadModelState,
     required LocalDataState localDataState,
-    required SensorState sensorState,
+    required TrackerState trackerState,
   }) {
     return loadModelState.mapOrNull(
       loaded: (value) => localDataState.mapOrNull(
-        loaded: (value) => sensorState.mapOrNull(
+        loaded: (value) => trackerState.mapOrNull(
           initial: (value) => true,
         ),
       ),
@@ -22,10 +23,10 @@ class Tracker extends StatelessWidget {
 
   bool? canStopBeClicked({
     required LocalDataState localDataState,
-    required SensorState sensorState,
+    required TrackerState trackerState,
   }) {
     return localDataState.mapOrNull(
-      loaded: (value) => sensorState.mapOrNull(
+      loaded: (value) => trackerState.mapOrNull(
         tracking: (value) => true,
       ),
     );
@@ -37,7 +38,7 @@ class Tracker extends StatelessWidget {
       builder: (context, loadModelState) {
         return BlocBuilder<LocalDataCubit, LocalDataState>(
           builder: (context, loadDataState) {
-            return BlocBuilder<SensorCubit, SensorState>(
+            return BlocBuilder<TrackerCubit, TrackerState>(
               builder: (context, sensorState) {
                 return Row(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -46,17 +47,23 @@ class Tracker extends StatelessWidget {
                         onPressed: canStartBeClicked(
                                     loadModelState: loadModelState,
                                     localDataState: loadDataState,
-                                    sensorState: sensorState) !=
+                                    trackerState: sensorState) !=
                                 null
                             ? () {
-                                context.read<SensorCubit>().startTracking(
+                                context.read<TrackerCubit>().startTracking(
                                     helper: context
                                         .read<LoadModelCubit>()
                                         .getModel(),
-                                    box:
-                                        context.read<LocalDataCubit>().getBox(),
+                                    outputBox: context
+                                        .read<LocalDataCubit>()
+                                        .getModelOutputBox(),
+                                    inputBox: context
+                                        .read<LocalDataCubit>()
+                                        .getModelInputBox(),
                                     localDataCubit:
-                                        context.read<LocalDataCubit>());
+                                        context.read<LocalDataCubit>(),
+                                    user:
+                                        context.read<LoginCubit>().getUser()!);
                               }
                             : null,
                         style: ElevatedButton.styleFrom(
@@ -67,13 +74,17 @@ class Tracker extends StatelessWidget {
                     ElevatedButton(
                         onPressed: canStopBeClicked(
                                     localDataState: loadDataState,
-                                    sensorState: sensorState) !=
+                                    trackerState: sensorState) !=
                                 null
                             ? () {
-                                context.read<SensorCubit>().stopTracking(
-                                    box: context
-                                        .read<LocalDataCubit>()
-                                        .getBox());
+                                context.read<TrackerCubit>().stopTracking(
+                                      outputBox: context
+                                          .read<LocalDataCubit>()
+                                          .getModelOutputBox(),
+                                      inputBox: context
+                                          .read<LocalDataCubit>()
+                                          .getModelInputBox(),
+                                    );
                               }
                             : null,
                         style: ElevatedButton.styleFrom(
@@ -84,14 +95,9 @@ class Tracker extends StatelessWidget {
                     ElevatedButton(
                         onPressed: canStopBeClicked(
                                     localDataState: loadDataState,
-                                    sensorState: sensorState) !=
+                                    trackerState: sensorState) !=
                                 null
-                            ? () {
-                                context.read<SensorCubit>().stopTracking(
-                                    box: context
-                                        .read<LocalDataCubit>()
-                                        .getBox());
-                              }
+                            ? () {}
                             : null,
                         style: ElevatedButton.styleFrom(
                           minimumSize: const Size(24, 24), // Set this

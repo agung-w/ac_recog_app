@@ -18,21 +18,27 @@ class ModelOutputAdapter extends TypeAdapter<ModelOutput> {
     };
     return ModelOutput(
       timestamp: fields[0] as int,
-      result: fields[1] as String,
+      username: fields[1] as String,
       probability: fields[2] as double,
+      result: fields[3] as String,
+      hand: fields[4] as String,
     );
   }
 
   @override
   void write(BinaryWriter writer, ModelOutput obj) {
     writer
-      ..writeByte(3)
+      ..writeByte(5)
       ..writeByte(0)
       ..write(obj.timestamp)
       ..writeByte(1)
-      ..write(obj.result)
+      ..write(obj.username)
       ..writeByte(2)
-      ..write(obj.probability);
+      ..write(obj.probability)
+      ..writeByte(3)
+      ..write(obj.result)
+      ..writeByte(4)
+      ..write(obj.hand);
   }
 
   @override
@@ -52,13 +58,17 @@ class ModelOutputAdapter extends TypeAdapter<ModelOutput> {
 
 ModelOutput _$ModelOutputFromJson(Map<String, dynamic> json) => ModelOutput(
       timestamp: json['timestamp'] as int,
-      result: json['result'] as String,
+      username: json['username'] as String,
       probability: (json['probability'] as num).toDouble(),
+      result: json['result'] as String,
+      hand: json['hand'] as String,
     );
 
 Map<String, dynamic> _$ModelOutputToJson(ModelOutput instance) =>
     <String, dynamic>{
       'timestamp': instance.timestamp,
-      'result': instance.result,
+      'username': instance.username,
       'probability': instance.probability,
+      'result': instance.result,
+      'hand': instance.hand,
     };

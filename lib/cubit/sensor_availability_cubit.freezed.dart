@@ -20,18 +20,21 @@ mixin _$SensorAvailabilityState {
   TResult when<TResult extends Object?>({
     required TResult Function(List<String>? sensors) unavailable,
     required TResult Function() available,
+    required TResult Function() initial,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(List<String>? sensors)? unavailable,
     TResult? Function()? available,
+    TResult? Function()? initial,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(List<String>? sensors)? unavailable,
     TResult Function()? available,
+    TResult Function()? initial,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -39,18 +42,21 @@ mixin _$SensorAvailabilityState {
   TResult map<TResult extends Object?>({
     required TResult Function(_Unavailable value) unavailable,
     required TResult Function(_Available value) available,
+    required TResult Function(_Initial value) initial,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Unavailable value)? unavailable,
     TResult? Function(_Available value)? available,
+    TResult? Function(_Initial value)? initial,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Unavailable value)? unavailable,
     TResult Function(_Available value)? available,
+    TResult Function(_Initial value)? initial,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -149,6 +155,7 @@ class _$_Unavailable implements _Unavailable {
   TResult when<TResult extends Object?>({
     required TResult Function(List<String>? sensors) unavailable,
     required TResult Function() available,
+    required TResult Function() initial,
   }) {
     return unavailable(sensors);
   }
@@ -158,6 +165,7 @@ class _$_Unavailable implements _Unavailable {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(List<String>? sensors)? unavailable,
     TResult? Function()? available,
+    TResult? Function()? initial,
   }) {
     return unavailable?.call(sensors);
   }
@@ -167,6 +175,7 @@ class _$_Unavailable implements _Unavailable {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(List<String>? sensors)? unavailable,
     TResult Function()? available,
+    TResult Function()? initial,
     required TResult orElse(),
   }) {
     if (unavailable != null) {
@@ -180,6 +189,7 @@ class _$_Unavailable implements _Unavailable {
   TResult map<TResult extends Object?>({
     required TResult Function(_Unavailable value) unavailable,
     required TResult Function(_Available value) available,
+    required TResult Function(_Initial value) initial,
   }) {
     return unavailable(this);
   }
@@ -189,6 +199,7 @@ class _$_Unavailable implements _Unavailable {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Unavailable value)? unavailable,
     TResult? Function(_Available value)? available,
+    TResult? Function(_Initial value)? initial,
   }) {
     return unavailable?.call(this);
   }
@@ -198,6 +209,7 @@ class _$_Unavailable implements _Unavailable {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Unavailable value)? unavailable,
     TResult Function(_Available value)? available,
+    TResult Function(_Initial value)? initial,
     required TResult orElse(),
   }) {
     if (unavailable != null) {
@@ -256,6 +268,7 @@ class _$_Available implements _Available {
   TResult when<TResult extends Object?>({
     required TResult Function(List<String>? sensors) unavailable,
     required TResult Function() available,
+    required TResult Function() initial,
   }) {
     return available();
   }
@@ -265,6 +278,7 @@ class _$_Available implements _Available {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(List<String>? sensors)? unavailable,
     TResult? Function()? available,
+    TResult? Function()? initial,
   }) {
     return available?.call();
   }
@@ -274,6 +288,7 @@ class _$_Available implements _Available {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(List<String>? sensors)? unavailable,
     TResult Function()? available,
+    TResult Function()? initial,
     required TResult orElse(),
   }) {
     if (available != null) {
@@ -287,6 +302,7 @@ class _$_Available implements _Available {
   TResult map<TResult extends Object?>({
     required TResult Function(_Unavailable value) unavailable,
     required TResult Function(_Available value) available,
+    required TResult Function(_Initial value) initial,
   }) {
     return available(this);
   }
@@ -296,6 +312,7 @@ class _$_Available implements _Available {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Unavailable value)? unavailable,
     TResult? Function(_Available value)? available,
+    TResult? Function(_Initial value)? initial,
   }) {
     return available?.call(this);
   }
@@ -305,6 +322,7 @@ class _$_Available implements _Available {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Unavailable value)? unavailable,
     TResult Function(_Available value)? available,
+    TResult Function(_Initial value)? initial,
     required TResult orElse(),
   }) {
     if (available != null) {
@@ -316,4 +334,111 @@ class _$_Available implements _Available {
 
 abstract class _Available implements SensorAvailabilityState {
   const factory _Available() = _$_Available;
+}
+
+/// @nodoc
+abstract class _$$_InitialCopyWith<$Res> {
+  factory _$$_InitialCopyWith(
+          _$_Initial value, $Res Function(_$_Initial) then) =
+      __$$_InitialCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$_InitialCopyWithImpl<$Res>
+    extends _$SensorAvailabilityStateCopyWithImpl<$Res, _$_Initial>
+    implements _$$_InitialCopyWith<$Res> {
+  __$$_InitialCopyWithImpl(_$_Initial _value, $Res Function(_$_Initial) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$_Initial implements _Initial {
+  const _$_Initial();
+
+  @override
+  String toString() {
+    return 'SensorAvailabilityState.initial()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$_Initial);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(List<String>? sensors) unavailable,
+    required TResult Function() available,
+    required TResult Function() initial,
+  }) {
+    return initial();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(List<String>? sensors)? unavailable,
+    TResult? Function()? available,
+    TResult? Function()? initial,
+  }) {
+    return initial?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(List<String>? sensors)? unavailable,
+    TResult Function()? available,
+    TResult Function()? initial,
+    required TResult orElse(),
+  }) {
+    if (initial != null) {
+      return initial();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Unavailable value) unavailable,
+    required TResult Function(_Available value) available,
+    required TResult Function(_Initial value) initial,
+  }) {
+    return initial(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Unavailable value)? unavailable,
+    TResult? Function(_Available value)? available,
+    TResult? Function(_Initial value)? initial,
+  }) {
+    return initial?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Unavailable value)? unavailable,
+    TResult Function(_Available value)? available,
+    TResult Function(_Initial value)? initial,
+    required TResult orElse(),
+  }) {
+    if (initial != null) {
+      return initial(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _Initial implements SensorAvailabilityState {
+  const factory _Initial() = _$_Initial;
 }
