@@ -1,7 +1,7 @@
 import 'package:ac_recog_app/entities/user.dart';
 import 'package:ac_recog_app/ui/pages/home.dart';
-import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'login_state.dart';
@@ -17,7 +17,8 @@ class LoginCubit extends Cubit<LoginState> {
           currentState.username!.isNotEmpty) {
         emit(_SignedIn(
             user: User(
-                username: currentState.username!, hand: currentState.hand!)));
+                name: currentState.username!.toUpperCase(),
+                hand: currentState.hand!)));
         Navigator.of(context).pushReplacement(
             MaterialPageRoute(builder: (context) => const Home()));
       } else {

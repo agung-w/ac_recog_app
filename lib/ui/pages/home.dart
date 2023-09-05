@@ -1,4 +1,6 @@
+import 'package:ac_recog_app/cubit/login_cubit.dart';
 import 'package:ac_recog_app/cubit/sensor_availability_cubit.dart';
+import 'package:ac_recog_app/cubit/summary_cubit.dart';
 import 'package:ac_recog_app/ui/widgets/clock.dart';
 import 'package:ac_recog_app/ui/widgets/lastest_result.dart';
 import 'package:ac_recog_app/ui/widgets/loading_animation.dart';
@@ -13,34 +15,47 @@ class Home extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        body: BlocBuilder<SensorAvailabilityCubit, SensorAvailabilityState>(
+        body: BlocBuilder<LoginCubit, LoginState>(
           builder: (context, state) {
-            return state.map(
-              available: (value) => const Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Expanded(
-                      flex: 2,
-                      child: Padding(
-                        padding: EdgeInsets.only(top: 6),
-                        child: Clock(),
-                      )),
-                  Expanded(flex: 1, child: Tracker()),
-                  Expanded(
-                      flex: 2,
-                      child: Padding(
-                        padding: EdgeInsets.only(top: 10),
-                        child: LatestResult(),
-                      ))
-                ],
-              ),
-              unavailable: (value) => Center(
-                child: Text(
-                  '${value.sensors?.map((e) => e)} Sensor(s) Not Detected',
-                  textAlign: TextAlign.center,
-                ),
-              ),
-              initial: (value) => const Center(child: Loading()),
+            state.mapOrNull(
+              signedIn: (value) {
+                context
+                    .read<SummaryCubit>()
+                    .getSummary(name: value.user.name, context: context);
+              },
+            );
+
+            return BlocBuilder<SensorAvailabilityCubit,
+                SensorAvailabilityState>(
+              builder: (context, state) {
+                return state.map(
+                  available: (value) => const Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Expanded(
+                          flex: 2,
+                          child: Padding(
+                            padding: EdgeInsets.only(top: 6),
+                            child: Clock(),
+                          )),
+                      Expanded(flex: 1, child: Tracker()),
+                      Expanded(
+                          flex: 2,
+                          child: Padding(
+                            padding: EdgeInsets.only(top: 10),
+                            child: LatestResult(),
+                          ))
+                    ],
+                  ),
+                  unavailable: (value) => Center(
+                    child: Text(
+                      '${value.sensors?.map((e) => e)} Sensor(s) Not Detected',
+                      textAlign: TextAlign.center,
+                    ),
+                  ),
+                  initial: (value) => const Center(child: LoadingWidget()),
+                );
+              },
             );
           },
         ),

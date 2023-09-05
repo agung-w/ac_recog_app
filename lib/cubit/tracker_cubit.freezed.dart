@@ -19,6 +19,7 @@ mixin _$TrackerState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
+    required TResult Function() uploadingData,
     required TResult Function(List<StreamSubscription> streamSubsriptions)
         tracking,
   }) =>
@@ -26,12 +27,14 @@ mixin _$TrackerState {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
+    TResult? Function()? uploadingData,
     TResult? Function(List<StreamSubscription> streamSubsriptions)? tracking,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
+    TResult Function()? uploadingData,
     TResult Function(List<StreamSubscription> streamSubsriptions)? tracking,
     required TResult orElse(),
   }) =>
@@ -39,18 +42,21 @@ mixin _$TrackerState {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Initial value) initial,
+    required TResult Function(_UploadingData value) uploadingData,
     required TResult Function(_Tracking value) tracking,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initial value)? initial,
+    TResult? Function(_UploadingData value)? uploadingData,
     TResult? Function(_Tracking value)? tracking,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initial value)? initial,
+    TResult Function(_UploadingData value)? uploadingData,
     TResult Function(_Tracking value)? tracking,
     required TResult orElse(),
   }) =>
@@ -113,6 +119,7 @@ class _$_Initial implements _Initial {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
+    required TResult Function() uploadingData,
     required TResult Function(List<StreamSubscription> streamSubsriptions)
         tracking,
   }) {
@@ -123,6 +130,7 @@ class _$_Initial implements _Initial {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
+    TResult? Function()? uploadingData,
     TResult? Function(List<StreamSubscription> streamSubsriptions)? tracking,
   }) {
     return initial?.call();
@@ -132,6 +140,7 @@ class _$_Initial implements _Initial {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
+    TResult Function()? uploadingData,
     TResult Function(List<StreamSubscription> streamSubsriptions)? tracking,
     required TResult orElse(),
   }) {
@@ -145,6 +154,7 @@ class _$_Initial implements _Initial {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Initial value) initial,
+    required TResult Function(_UploadingData value) uploadingData,
     required TResult Function(_Tracking value) tracking,
   }) {
     return initial(this);
@@ -154,6 +164,7 @@ class _$_Initial implements _Initial {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initial value)? initial,
+    TResult? Function(_UploadingData value)? uploadingData,
     TResult? Function(_Tracking value)? tracking,
   }) {
     return initial?.call(this);
@@ -163,6 +174,7 @@ class _$_Initial implements _Initial {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initial value)? initial,
+    TResult Function(_UploadingData value)? uploadingData,
     TResult Function(_Tracking value)? tracking,
     required TResult orElse(),
   }) {
@@ -175,6 +187,115 @@ class _$_Initial implements _Initial {
 
 abstract class _Initial implements TrackerState {
   const factory _Initial() = _$_Initial;
+}
+
+/// @nodoc
+abstract class _$$_UploadingDataCopyWith<$Res> {
+  factory _$$_UploadingDataCopyWith(
+          _$_UploadingData value, $Res Function(_$_UploadingData) then) =
+      __$$_UploadingDataCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$_UploadingDataCopyWithImpl<$Res>
+    extends _$TrackerStateCopyWithImpl<$Res, _$_UploadingData>
+    implements _$$_UploadingDataCopyWith<$Res> {
+  __$$_UploadingDataCopyWithImpl(
+      _$_UploadingData _value, $Res Function(_$_UploadingData) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$_UploadingData implements _UploadingData {
+  const _$_UploadingData();
+
+  @override
+  String toString() {
+    return 'TrackerState.uploadingData()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$_UploadingData);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function() uploadingData,
+    required TResult Function(List<StreamSubscription> streamSubsriptions)
+        tracking,
+  }) {
+    return uploadingData();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initial,
+    TResult? Function()? uploadingData,
+    TResult? Function(List<StreamSubscription> streamSubsriptions)? tracking,
+  }) {
+    return uploadingData?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? uploadingData,
+    TResult Function(List<StreamSubscription> streamSubsriptions)? tracking,
+    required TResult orElse(),
+  }) {
+    if (uploadingData != null) {
+      return uploadingData();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initial value) initial,
+    required TResult Function(_UploadingData value) uploadingData,
+    required TResult Function(_Tracking value) tracking,
+  }) {
+    return uploadingData(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initial value)? initial,
+    TResult? Function(_UploadingData value)? uploadingData,
+    TResult? Function(_Tracking value)? tracking,
+  }) {
+    return uploadingData?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initial value)? initial,
+    TResult Function(_UploadingData value)? uploadingData,
+    TResult Function(_Tracking value)? tracking,
+    required TResult orElse(),
+  }) {
+    if (uploadingData != null) {
+      return uploadingData(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _UploadingData implements TrackerState {
+  const factory _UploadingData() = _$_UploadingData;
 }
 
 /// @nodoc
@@ -252,6 +373,7 @@ class _$_Tracking implements _Tracking {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
+    required TResult Function() uploadingData,
     required TResult Function(List<StreamSubscription> streamSubsriptions)
         tracking,
   }) {
@@ -262,6 +384,7 @@ class _$_Tracking implements _Tracking {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
+    TResult? Function()? uploadingData,
     TResult? Function(List<StreamSubscription> streamSubsriptions)? tracking,
   }) {
     return tracking?.call(streamSubsriptions);
@@ -271,6 +394,7 @@ class _$_Tracking implements _Tracking {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
+    TResult Function()? uploadingData,
     TResult Function(List<StreamSubscription> streamSubsriptions)? tracking,
     required TResult orElse(),
   }) {
@@ -284,6 +408,7 @@ class _$_Tracking implements _Tracking {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Initial value) initial,
+    required TResult Function(_UploadingData value) uploadingData,
     required TResult Function(_Tracking value) tracking,
   }) {
     return tracking(this);
@@ -293,6 +418,7 @@ class _$_Tracking implements _Tracking {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initial value)? initial,
+    TResult? Function(_UploadingData value)? uploadingData,
     TResult? Function(_Tracking value)? tracking,
   }) {
     return tracking?.call(this);
@@ -302,6 +428,7 @@ class _$_Tracking implements _Tracking {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initial value)? initial,
+    TResult Function(_UploadingData value)? uploadingData,
     TResult Function(_Tracking value)? tracking,
     required TResult orElse(),
   }) {

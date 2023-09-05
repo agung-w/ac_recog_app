@@ -1,4 +1,5 @@
 import 'dart:isolate';
+import 'package:ac_recog_app/const/model_const.dart';
 import 'package:ac_recog_app/entities/model_output.dart';
 import 'package:ac_recog_app/entities/user.dart';
 import 'package:tflite_flutter/tflite_flutter.dart';
@@ -8,17 +9,6 @@ class IsolateInference {
   final ReceivePort _receivePort = ReceivePort();
   late Isolate _isolate;
   late SendPort _sendPort;
-  static const List<String> labels = [
-    'Modified Skull Crushers',
-    'Seated Rows',
-    'Reserve Flies',
-    'Forward Punches',
-    'Diagonal Shoulder Rise',
-    'Overhead Triceps',
-    'Lateral Raise',
-    'Bicep Curls',
-    'Over Head Press'
-  ];
 
   SendPort get sendPort => _sendPort;
 
@@ -54,7 +44,7 @@ class IsolateInference {
           timestamp: DateTime.now().millisecondsSinceEpoch,
           result: labels[result.indexOf(maxScore)],
           probability: maxScore,
-          username: isolateModel.user.username,
+          name: isolateModel.user.name,
           hand: isolateModel.user.hand);
       isolateModel.responsePort.send(modelOutput);
     }

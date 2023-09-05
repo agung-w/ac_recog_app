@@ -4,8 +4,13 @@ import 'package:ac_recog_app/cubit/local_data_cubit.dart';
 import 'package:ac_recog_app/entities/model_input.dart';
 import 'package:ac_recog_app/entities/model_output.dart';
 import 'package:ac_recog_app/entities/user.dart';
+import 'package:ac_recog_app/helper/api_result.dart';
 import 'package:ac_recog_app/helper/human_activity_recognition_helper.dart';
+import 'package:ac_recog_app/repository/model_input_repository.dart';
+import 'package:ac_recog_app/repository/model_output_repository.dart';
 import 'package:bloc/bloc.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:hive/hive.dart';
 import 'package:motion_sensors/motion_sensors.dart';
@@ -92,14 +97,37 @@ class TrackerCubit extends Cubit<TrackerState> {
     }
   }
 
-  void stopTracking(
+  Future<void> stopTracking(
       {required Box<ModelOutput> outputBox,
-      required Box<ModelInput> inputBox}) {
+      required Box<ModelInput> inputBox,
+      required BuildContext context}) async {
     if (state is _Tracking) {
       for (var element in (state as _Tracking).streamSubsriptions) {
         element.cancel();
       }
       emit(const _Initial());
+      ApiResult<String> outputResult = await ModelOutputRepository()
+          .storeData(data: (outputBox.values.toList()));
+      ApiResult<String> inputResult = await ModelInputRepository()
+          .storeData(data: (inputBox.values.toList()));
+      outputResult.map(
+        failed: (value) {
+          ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(content: Center(child: Text(value.message))));
+        },
+        success: (value) {
+          outputBox.clear();
+        },
+      );
+      inputResult.map(
+        failed: (value) {
+          ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(content: Center(child: Text(value.message))));
+        },
+        success: (value) {
+          inputBox.clear();
+        },
+      );
     }
   }
 

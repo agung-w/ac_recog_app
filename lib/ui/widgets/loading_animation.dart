@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
-class Loading extends StatelessWidget {
+class LoadingWidget extends StatelessWidget {
   final double size;
   final Color color;
-  const Loading(
+  const LoadingWidget(
       {super.key, this.size = 16, this.color = const Color(0xFFfb5c18)});
 
   @override

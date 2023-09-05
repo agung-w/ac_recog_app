@@ -16,9 +16,9 @@ class LatestResult extends StatelessWidget {
             return state.map(
                 loaded: (value) => Text(value.modelOutputBox.values
                         .where((element) =>
-                            element.username ==
+                            element.name ==
                             loginState.mapOrNull(
-                              signedIn: (value) => value.user.username,
+                              signedIn: (value) => value.user.name,
                             ))
                         .lastOrNull
                         ?.result ??
@@ -26,7 +26,7 @@ class LatestResult extends StatelessWidget {
                 initial: (value) => const Text("Cant load data"),
                 loading: (value) => const Column(
                       children: [
-                        Loading(),
+                        LoadingWidget(),
                       ],
                     ));
           },
