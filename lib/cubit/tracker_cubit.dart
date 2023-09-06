@@ -8,9 +8,8 @@ import 'package:ac_recog_app/helper/api_result.dart';
 import 'package:ac_recog_app/helper/human_activity_recognition_helper.dart';
 import 'package:ac_recog_app/repository/model_input_repository.dart';
 import 'package:ac_recog_app/repository/model_output_repository.dart';
-import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:hive/hive.dart';
 import 'package:motion_sensors/motion_sensors.dart';
@@ -25,7 +24,7 @@ class TrackerCubit extends Cubit<TrackerState> {
       {required HumanActivityRecognitionHelper helper,
       required Box<ModelOutput> outputBox,
       required Box<ModelInput> inputBox,
-      required LocalDataCubit localDataCubit,
+      required BuildContext context,
       required User user}) {
     List<ModelInput> currentInputList = [];
 
@@ -78,12 +77,15 @@ class TrackerCubit extends Cubit<TrackerState> {
           relativeOrientationZ: relativeOrientation.z,
         );
         if (currentInputList.length == 70) {
-          _predict(
-                  helper: helper,
-                  input: currentInputList,
-                  localDataCubit: localDataCubit,
-                  user: user)
-              .then((value) => currentInputList.clear());
+          List<ModelInput> tempList = List.from(currentInputList);
+          currentInputList.clear();
+          _predict(helper: helper, input: tempList, user: user).then((value) {
+            List<ModelInput> inputList = List.from(currentInputList
+                .map((e) => e.copyWith(timestamp: value.timestamp)));
+            context
+                .read<LocalDataCubit>()
+                .saveModelResult(output: value, inputList: inputList);
+          });
           emit(_Tracking(
             streamSubsriptions: streamSubsriptions,
           ));
@@ -131,17 +133,12 @@ class TrackerCubit extends Cubit<TrackerState> {
     }
   }
 
-  Future<void> _predict(
+  Future<ModelOutput> _predict(
       {required HumanActivityRecognitionHelper helper,
       required List<ModelInput> input,
-      required LocalDataCubit localDataCubit,
       required User user}) async {
-    ModelOutput value =
+    ModelOutput modelResult =
         await helper.inference(input.map((e) => e.toList).toList(), user);
-    List<ModelInput> storedInputList =
-        List.from(input.map((e) => e.copyWith(timestamp: value.timestamp)));
-
-    localDataCubit.addModelOutputData(output: value).then((value) =>
-        localDataCubit.addModelInputData(inputList: storedInputList));
+    return modelResult;
   }
 }

@@ -54,7 +54,7 @@ class Summary extends StatelessWidget {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Padding(
-                                padding: const EdgeInsets.only(top: 8.0),
+                                padding: const EdgeInsets.only(top: 16.0),
                                 child: Column(
                                     children: value.resultList
                                         .map((e) => ChartIndicator(

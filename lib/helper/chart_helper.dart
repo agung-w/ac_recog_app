@@ -24,3 +24,28 @@ Color getIndicatorColor(String motionName) {
       return const Color.fromARGB(15, 37, 32, 39);
   }
 }
+
+int getIndex(String motionName) {
+  switch (motionName) {
+    case "Modified Skull Crushers":
+      return 0;
+    case "Seated Rows":
+      return 1;
+    case "Reserve Flyes":
+      return 2;
+    case "Forward Punches":
+      return 3;
+    case "Diagonal Shoulder Raise":
+      return 4;
+    case "Overhead Triceps":
+      return 5;
+    case "Lateral Raise":
+      return 6;
+    case "Bicep Curls":
+      return 7;
+    case "Overhead Press":
+      return 8;
+    default:
+      return 9;
+  }
+}

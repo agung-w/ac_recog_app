@@ -1,5 +1,5 @@
 import 'package:ac_recog_app/entities/summary_chart_section.dart';
-import 'package:ac_recog_app/helper/indicator_color.dart';
+import 'package:ac_recog_app/helper/chart_helper.dart';
 import 'package:ac_recog_app/helper/time_helper.dart';
 import 'package:ac_recog_app/repository/model_output_repository.dart';
 import 'package:flutter/material.dart';
@@ -23,8 +23,11 @@ class SummaryCubit extends Cubit<SummaryState> {
         totalDuration += e.duration.round();
 
         return SummaryChartSection(
-            indicatorColor: getIndicatorColor(e.motionName), motionSummary: e);
+            indicatorColor: getIndicatorColor(e.motionName),
+            motionSummary: e,
+            index: getIndex(e.motionName));
       }).toList();
+      resultList.sort((a, b) => a.index.compareTo(b.index));
       emit(_Loaded(
           resultList: resultList, totalDurationInSecond: totalDuration));
     }, failed: (value) {

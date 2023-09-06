@@ -32,10 +32,6 @@ class Login extends StatelessWidget {
                   style: const TextStyle(fontSize: 12),
                   onChanged: (value) =>
                       context.read<LoginCubit>().setUsername(name: value),
-                  controller: TextEditingController(
-                      text: state.mapOrNull(
-                    initial: (value) => value.username,
-                  )),
                   decoration: const InputDecoration(
                       isDense: true,
                       contentPadding: EdgeInsets.symmetric(vertical: 5),

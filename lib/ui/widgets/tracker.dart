@@ -76,7 +76,7 @@ class _StartTrackingButton extends StatelessWidget {
                                 inputBox: context
                                     .read<LocalDataCubit>()
                                     .getModelInputBox(),
-                                localDataCubit: context.read<LocalDataCubit>(),
+                                context: context,
                                 user: context.read<LoginCubit>().getUser()!);
                           }
                         : null,
