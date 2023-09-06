@@ -1,13 +1,13 @@
 const List<String> labels = [
   'Modified Skull Crushers',
   'Seated Rows',
-  'Reserve Flies',
+  'Reserve Flyes',
   'Forward Punches',
-  'Diagonal Shoulder Rise',
+  'Diagonal Shoulder Raise',
   'Overhead Triceps',
   'Lateral Raise',
   'Bicep Curls',
-  'Over Head Press'
+  'Overhead Press'
 ];
 
 const int modelInputLength = 70;
