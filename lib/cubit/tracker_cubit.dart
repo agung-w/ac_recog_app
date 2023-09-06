@@ -27,7 +27,6 @@ class TrackerCubit extends Cubit<TrackerState> {
       required BuildContext context,
       required User user}) {
     List<ModelInput> currentInputList = [];
-
     if (state is _Initial) {
       Vector3 accelerometer = Vector3.zero();
       Vector3 magnetometer = Vector3.zero();
