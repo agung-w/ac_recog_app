@@ -11,7 +11,7 @@ String secondToHHMMSSformat({required int second}) {
   return "$hh : $mm : $ss";
 }
 
-String secondToSSorMMorHH({required int second}) {
+String secondToSSorMMorHH({required double second}) {
   if (second / 60 < 1) {
     return "${second}s";
   } else if (second / 3600 < 1) {
@@ -19,6 +19,12 @@ String secondToSSorMMorHH({required int second}) {
   } else {
     return "${(second / 3600).floor()}h";
   }
+}
+
+String secondTrailingFormatter({required double second}) {
+  RegExp regex = RegExp(r'([.]*0)(?!.*\d)');
+
+  return "${second.toStringAsFixed(1).replaceAll(regex, '')}s";
 }
 
 int getCurrentDate() {

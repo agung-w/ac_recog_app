@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:ac_recog_app/const/model_const.dart';
 import 'package:ac_recog_app/cubit/local_data_cubit.dart';
 import 'package:ac_recog_app/entities/model_input.dart';
 import 'package:ac_recog_app/entities/model_output.dart';
@@ -75,7 +76,7 @@ class TrackerCubit extends Cubit<TrackerState> {
           inverseQuaternionZ: inverseQuaternion.z,
           relativeOrientationZ: relativeOrientation.z,
         );
-        if (currentInputList.length == 70) {
+        if (currentInputList.length == modelInputLength) {
           List<ModelInput> tempList = List.from(currentInputList);
           currentInputList.clear();
           _predict(helper: helper, input: tempList, user: user).then((value) {

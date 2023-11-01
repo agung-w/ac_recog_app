@@ -18,9 +18,9 @@ class SummaryCubit extends Cubit<SummaryState> {
         startTime: getCurrentDate(),
         endTime: getCurrentDate() + 86400000);
     result.map(success: (value) {
-      int totalDuration = 0;
+      double totalDuration = 0;
       List<SummaryChartSection> resultList = value.value.map((e) {
-        totalDuration += e.duration.round();
+        totalDuration += e.duration;
 
         return SummaryChartSection(
             indicatorColor: getIndicatorColor(e.motionName),
@@ -29,7 +29,8 @@ class SummaryCubit extends Cubit<SummaryState> {
       }).toList();
       resultList.sort((a, b) => a.index.compareTo(b.index));
       emit(_Loaded(
-          resultList: resultList, totalDurationInSecond: totalDuration));
+          resultList: resultList,
+          totalDurationInSecond: totalDuration.round()));
     }, failed: (value) {
       ScaffoldMessenger.of(context)
           .showSnackBar(SnackBar(content: Center(child: Text(value.message))));

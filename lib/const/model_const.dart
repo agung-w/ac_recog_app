@@ -10,4 +10,5 @@ const List<String> labels = [
   'Overhead Press'
 ];
 
-const int modelInputLength = 70;
+const int modelInputLength = 32;
+const modelPath = 'assets/models/right_6_oktober.tflite';

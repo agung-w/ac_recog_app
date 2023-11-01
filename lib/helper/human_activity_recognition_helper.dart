@@ -1,13 +1,12 @@
 import 'dart:isolate';
 
+import 'package:ac_recog_app/const/model_const.dart';
 import 'package:ac_recog_app/entities/model_output.dart';
 import 'package:ac_recog_app/entities/user.dart';
 import 'package:ac_recog_app/helper/isolate_inference.dart';
 import 'package:tflite_flutter/tflite_flutter.dart';
 
 class HumanActivityRecognitionHelper {
-  static const modelPath = 'assets/models/right_16_agustus.tflite';
-
   late final Interpreter interpreter;
   late final List<String> labels;
   late final IsolateInference isolateInference;

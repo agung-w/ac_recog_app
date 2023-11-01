@@ -41,8 +41,9 @@ class ChartIndicator extends StatelessWidget {
           ),
         ),
         Expanded(
-            flex: 2,
-            child: Center(
+            flex: 3,
+            child: Align(
+              alignment: Alignment.centerRight,
               child: Text(
                 suffixText,
                 style: TextStyle(

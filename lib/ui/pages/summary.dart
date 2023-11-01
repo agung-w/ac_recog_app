@@ -39,8 +39,8 @@ class Summary extends StatelessWidget {
                                   .map((e) => PieChartSectionData(
                                       color: e.indicatorColor,
                                       value: e.motionSummary.duration,
-                                      title:
-                                          "${e.motionSummary.duration.toStringAsFixed(0)}s",
+                                      title: secondTrailingFormatter(
+                                          second: e.motionSummary.duration),
                                       titleStyle: const TextStyle(
                                           color: Colors.white, fontSize: 12),
                                       showTitle: true))
@@ -61,8 +61,9 @@ class Summary extends StatelessWidget {
                                             color: e.indicatorColor,
                                             text: e.motionSummary.motionName,
                                             suffixText: secondToSSorMMorHH(
-                                                second: e.motionSummary.duration
-                                                    .floor())))
+                                                second: double.parse(e
+                                                    .motionSummary.duration
+                                                    .toStringAsFixed(1)))))
                                         .toList()),
                               ),
                               Column(
