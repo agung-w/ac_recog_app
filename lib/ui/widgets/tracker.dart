@@ -1,4 +1,3 @@
-import 'package:ac_recog_app/cubit/load_model_cubit.dart';
 import 'package:ac_recog_app/cubit/local_data_cubit.dart';
 import 'package:ac_recog_app/cubit/login_cubit.dart';
 import 'package:ac_recog_app/cubit/summary_cubit.dart';
@@ -13,21 +12,17 @@ class Tracker extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<LoadModelCubit, LoadModelState>(
-      builder: (context, loadModelState) {
-        return BlocBuilder<LocalDataCubit, LocalDataState>(
-          builder: (context, loadDataState) {
-            return BlocBuilder<TrackerCubit, TrackerState>(
-              builder: (context, sensorState) {
-                return const Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    _StartTrackingButton(),
-                    _StopTrackingButton(),
-                    _ShowSummaryButton(),
-                  ],
-                );
-              },
+    return BlocBuilder<LocalDataCubit, LocalDataState>(
+      builder: (context, loadDataState) {
+        return BlocBuilder<TrackerCubit, TrackerState>(
+          builder: (context, sensorState) {
+            return const Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                _StartTrackingButton(),
+                _StopTrackingButton(),
+                _ShowSummaryButton(),
+              ],
             );
           },
         );
@@ -39,15 +34,12 @@ class Tracker extends StatelessWidget {
 class _StartTrackingButton extends StatelessWidget {
   const _StartTrackingButton();
   bool? canStartBeClicked({
-    required LoadModelState loadModelState,
     required LocalDataState localDataState,
     required TrackerState trackerState,
   }) {
-    return loadModelState.mapOrNull(
-      loaded: (value) => localDataState.mapOrNull(
-        loaded: (value) => trackerState.mapOrNull(
-          initial: (value) => true,
-        ),
+    return localDataState.mapOrNull(
+      loaded: (value) => trackerState.mapOrNull(
+        initial: (value) => true,
       ),
     );
   }
@@ -56,37 +48,30 @@ class _StartTrackingButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<LocalDataCubit, LocalDataState>(
       builder: (context, localDataState) {
-        return BlocBuilder<LoadModelCubit, LoadModelState>(
-          builder: (context, loadModelState) {
-            return BlocBuilder<TrackerCubit, TrackerState>(
-              builder: (context, trackerState) {
-                return ElevatedButton(
-                    onPressed: canStartBeClicked(
-                                loadModelState: loadModelState,
-                                localDataState: localDataState,
-                                trackerState: trackerState) !=
-                            null
-                        ? () {
-                            context.read<TrackerCubit>().startTracking(
-                                helper:
-                                    context.read<LoadModelCubit>().getModel(),
-                                outputBox: context
-                                    .read<LocalDataCubit>()
-                                    .getModelOutputBox(),
-                                inputBox: context
-                                    .read<LocalDataCubit>()
-                                    .getModelInputBox(),
-                                context: context,
-                                user: context.read<LoginCubit>().getUser()!);
-                          }
-                        : null,
-                    style: ElevatedButton.styleFrom(
-                      minimumSize: Size.zero, // Set this
-                      padding: EdgeInsets.zero, // and this
-                    ),
-                    child: const Icon(Icons.play_arrow));
-              },
-            );
+        return BlocBuilder<TrackerCubit, TrackerState>(
+          builder: (context, trackerState) {
+            return ElevatedButton(
+                onPressed: canStartBeClicked(
+                            localDataState: localDataState,
+                            trackerState: trackerState) !=
+                        null
+                    ? () {
+                        context.read<TrackerCubit>().startTracking(
+                            outputBox: context
+                                .read<LocalDataCubit>()
+                                .getModelOutputBox(),
+                            inputBox: context
+                                .read<LocalDataCubit>()
+                                .getModelInputBox(),
+                            context: context,
+                            user: context.read<LoginCubit>().getUser()!);
+                      }
+                    : null,
+                style: ElevatedButton.styleFrom(
+                  minimumSize: Size.zero, // Set this
+                  padding: EdgeInsets.zero, // and this
+                ),
+                child: const Icon(Icons.play_arrow));
           },
         );
       },

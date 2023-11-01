@@ -1,6 +1,5 @@
 import 'dart:io';
 
-import 'package:ac_recog_app/cubit/load_model_cubit.dart';
 import 'package:ac_recog_app/cubit/local_data_cubit.dart';
 import 'package:ac_recog_app/cubit/login_cubit.dart';
 import 'package:ac_recog_app/cubit/sensor_availability_cubit.dart';
@@ -35,7 +34,6 @@ class MainApp extends StatelessWidget {
       providers: [
         BlocProvider(create: (context) => TrackerCubit()),
         BlocProvider(create: (context) => LocalDataCubit()..loadData()),
-        BlocProvider(create: (context) => LoadModelCubit()..loadModel()),
         BlocProvider(create: (context) => LoginCubit()),
         BlocProvider(create: (context) => SummaryCubit()),
         BlocProvider(

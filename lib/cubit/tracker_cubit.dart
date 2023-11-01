@@ -6,7 +6,6 @@ import 'package:ac_recog_app/entities/model_input.dart';
 import 'package:ac_recog_app/entities/model_output.dart';
 import 'package:ac_recog_app/entities/user.dart';
 import 'package:ac_recog_app/helper/api_result.dart';
-import 'package:ac_recog_app/helper/human_activity_recognition_helper.dart';
 import 'package:ac_recog_app/repository/model_input_repository.dart';
 import 'package:ac_recog_app/repository/model_output_repository.dart';
 import 'package:flutter/material.dart';
@@ -22,8 +21,7 @@ part 'tracker_cubit.freezed.dart';
 class TrackerCubit extends Cubit<TrackerState> {
   TrackerCubit() : super(const TrackerState.initial());
   void startTracking(
-      {required HumanActivityRecognitionHelper helper,
-      required Box<ModelOutput> outputBox,
+      {required Box<ModelOutput> outputBox,
       required Box<ModelInput> inputBox,
       required BuildContext context,
       required User user}) {
@@ -79,13 +77,13 @@ class TrackerCubit extends Cubit<TrackerState> {
         if (currentInputList.length == modelInputLength) {
           List<ModelInput> tempList = List.from(currentInputList);
           currentInputList.clear();
-          _predict(helper: helper, input: tempList, user: user).then((value) {
-            List<ModelInput> inputList = List.from(
-                tempList.map((e) => e.copyWith(timestamp: value.timestamp)));
-            context
-                .read<LocalDataCubit>()
-                .saveModelResult(output: value, inputList: inputList);
-          });
+          // _predict(helper: helper, input: tempList, user: user).then((value) {
+          //   List<ModelInput> inputList = List.from(
+          //       tempList.map((e) => e.copyWith(timestamp: value.timestamp)));
+          //   context
+          //       .read<LocalDataCubit>()
+          //       .saveModelResult(output: value, inputList: inputList);
+          // });
           emit(_Tracking(
             streamSubsriptions: streamSubsriptions,
           ));
@@ -131,14 +129,5 @@ class TrackerCubit extends Cubit<TrackerState> {
         },
       );
     }
-  }
-
-  Future<ModelOutput> _predict(
-      {required HumanActivityRecognitionHelper helper,
-      required List<ModelInput> input,
-      required User user}) async {
-    ModelOutput modelResult =
-        await helper.inference(input.map((e) => e.toList).toList(), user);
-    return modelResult;
   }
 }
