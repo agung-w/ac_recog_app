@@ -80,8 +80,8 @@ class TrackerCubit extends Cubit<TrackerState> {
           List<ModelInput> tempList = List.from(currentInputList);
           currentInputList.clear();
           _predict(helper: helper, input: tempList, user: user).then((value) {
-            List<ModelInput> inputList = List.from(currentInputList
-                .map((e) => e.copyWith(timestamp: value.timestamp)));
+            List<ModelInput> inputList = List.from(
+                tempList.map((e) => e.copyWith(timestamp: value.timestamp)));
             context
                 .read<LocalDataCubit>()
                 .saveModelResult(output: value, inputList: inputList);
