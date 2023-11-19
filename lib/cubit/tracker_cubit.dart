@@ -8,6 +8,7 @@ import 'package:ac_recog_app/entities/user.dart';
 import 'package:ac_recog_app/helper/api_result.dart';
 import 'package:ac_recog_app/repository/model_input_repository.dart';
 import 'package:ac_recog_app/repository/model_output_repository.dart';
+import 'package:ac_recog_app/repository/predict_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -77,16 +78,19 @@ class TrackerCubit extends Cubit<TrackerState> {
         if (currentInputList.length == modelInputLength) {
           List<ModelInput> tempList = List.from(currentInputList);
           currentInputList.clear();
-          // _predict(helper: helper, input: tempList, user: user).then((value) {
-          //   List<ModelInput> inputList = List.from(
-          //       tempList.map((e) => e.copyWith(timestamp: value.timestamp)));
-          //   context
-          //       .read<LocalDataCubit>()
-          //       .saveModelResult(output: value, inputList: inputList);
-          // });
-          emit(_Tracking(
-            streamSubsriptions: streamSubsriptions,
-          ));
+          // pikir cara handle error dri servernya
+          PredictRepository().getPrediction(
+              user: user, input: [tempList.map((e) => e.toList).toList()]).then(
+            (value) => value.map(success: (result) {
+              List<ModelInput> inputList = List.from(tempList
+                  .map((e) => e.copyWith(timestamp: result.value.timestamp)));
+              context
+                  .read<LocalDataCubit>()
+                  .saveModelResult(output: result.value, inputList: inputList);
+            }, failed: (result) {
+              print(state);
+            }),
+          );
         } else {
           currentInputList.add(modelInput);
         }

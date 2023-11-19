@@ -2,7 +2,6 @@ import 'package:ac_recog_app/cubit/login_cubit.dart';
 import 'package:ac_recog_app/cubit/sensor_availability_cubit.dart';
 import 'package:ac_recog_app/cubit/summary_cubit.dart';
 import 'package:ac_recog_app/ui/widgets/clock.dart';
-import 'package:ac_recog_app/ui/widgets/lastest_result.dart';
 import 'package:ac_recog_app/ui/widgets/loading_animation.dart';
 import 'package:ac_recog_app/ui/widgets/tracker.dart';
 import 'package:flutter/material.dart';
@@ -38,11 +37,9 @@ class Home extends StatelessWidget {
                         )),
                     Expanded(flex: 1, child: Tracker()),
                     Expanded(
-                        flex: 2,
-                        child: Padding(
-                          padding: EdgeInsets.only(top: 10),
-                          child: LatestResult(),
-                        ))
+                      flex: 2,
+                      child: SizedBox(),
+                    )
                   ],
                 ),
                 unavailable: (value) => Center(
